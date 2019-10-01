@@ -1,7 +1,6 @@
 FROM alpine:edge
 MAINTAINER w8ay@qq.com
 
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 RUN set -x \
     && apk update \
     && apk add python3-dev \
@@ -20,7 +19,7 @@ COPY . /opt/w12scan
 
 RUN set -x \
     && cp /opt/w12scan/dockerconf/w12scan_nginx.conf /etc/nginx/conf.d/w12scan_nginx.conf \
-    && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple -r /opt/w12scan/requirements.txt \
+    && pip3 install -r /opt/w12scan/requirements.txt \
     && chmod a+x /opt/w12scan/dockerconf/start.sh \
     && apk del gcc \
     && apk del libc-dev \
